@@ -1,0 +1,23 @@
+import tutorial
+class Child extends Person{
+  /*the characteristic predicate */
+	Child() { this.getAge() < 10}
+  /* the overridden member predicate */
+  override predicate isAllowedIn(string region){
+  	region = this.getLocation()
+  }
+}
+class Southerner extends Person{
+ /* characteristic predicate*/
+  Southerner() {this.getLocation() = "south"}
+}
+predicate isBald(Person p){
+	not exists(string c | p.getHairColor() = c)
+}
+
+from Southerner s
+where s.isAllowedIn("north")
+and isBald(s)
+select s
+
+/*Charlie and Hugh are in BIG trouble*/
